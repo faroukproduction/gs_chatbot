@@ -222,7 +222,7 @@ class GreatSpireChatbot {
                         }, []);
 
                         const sourcesList = uniqueSources
-                            .map(s => `<a href="${s.url}" target="_blank">${s.source} ↗</a>`)
+                            .map(s => `<a href="${s.url}" target="_blank">${s.source}</a>`)
                             .join(' | ');
                         answer += `\n\n<small style="color: #A0A0B0;">Sources: ${sourcesList}</small>`;
                     }

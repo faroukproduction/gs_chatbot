@@ -5,7 +5,7 @@
 
 import OpenAI from 'openai';
 import { vectorStore } from './vector-store.js';
-import { categories } from './knowledge-documents.js';
+
 
 class LLMService {
     constructor() {
