@@ -85,8 +85,8 @@ export const knowledgeDocuments = [
     {
         id: 'download_app_links',
         title: 'Where can I download the Great Spire app?',
-        content: 'iOS App Store: https://apps.apple.com/pl/app/great-spire-social-wellness/id6746274243 \nGoogle Play Store: https://play.google.com/store/apps/details?id=io.greatspire',
-        keywords: ['Download', 'App Store', 'Google Play', 'iOS', 'Android', 'Links'],
+        content: 'Download Great Spire for free! iPhone/iPad: [App Store](https://apps.apple.com/pl/app/great-spire-social-wellness/id6746274243). Android: [Google Play](https://play.google.com/store/apps/details?id=io.greatspire).',
+        keywords: ['Download', 'App Store', 'Google Play', 'iOS', 'Android', 'Links', 'Install', 'Get the app'],
         category: 'Getting Started',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
@@ -197,8 +197,8 @@ export const knowledgeDocuments = [
     {
         id: 'payment_methods',
         title: 'How do payments and refunds work?',
-        content: 'Payments via Stripe (secure one-time). No subscription fees. Refunds for products generally NOT issued (instant access). Refunds for sessions issued if practitioner cancels. Request refund via Support within 7 days.',
-        keywords: ['Payment', 'Refund', 'Stripe', 'Policy'],
+        content: 'Payments uses Stripe (secure one-time). You keep 100% minus fees (15% App Store/Google Play fee + Stripe fees). No platform fees. Refunds generally NOT issued for digital products.',
+        keywords: ['Payment', 'Refund', 'Stripe', 'Policy', '15%', 'Fees'],
         category: 'Payments & Refunds',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io/support'
@@ -226,11 +226,11 @@ export const knowledgeDocuments = [
     {
         id: 'practitioner_revenue',
         title: 'How does revenue work for practitioners?',
-        content: 'You keep 100% of your earnings after external fees. For in-app digital product sales, Apple/Google take a 15% fee. Standard Stripe processing fees (~3%) also apply. Great Spire takes 0%.',
+        content: 'You keep 100% of your earnings after external fees. For digital product sales in the app, there is a **15% fee** from Apple/Google. Standard Stripe processing fees (~3%) also apply. Great Spire takes 0%.',
         keywords: ['Revenue', 'Earnings', '100%', 'Commission', 'Fees', '15%'],
         category: 'Practitioner Operations',
-        source: 'Great Spire Guide',
-        url: 'https://www.greatspire.io'
+        source: 'Creator Terms',
+        url: 'https://www.greatspire.io/creator-terms'
     },
     {
         id: 'app_store_pricing',
@@ -238,14 +238,14 @@ export const knowledgeDocuments = [
         content: 'For digital products sold in the app, there is a **15% fee** charged by Apple/Google. In addition, standard Stripe processing fees apply (~3%). There are NO platform fees from Great Spire itself (we take 0%). You keep 100% of the remaining revenue.',
         keywords: ['Pricing', 'Commission', 'Apple', 'Google', '15%', 'Fees', 'Stripe'],
         category: 'Practitioner Operations',
-        source: 'Great Spire Guide',
-        url: 'https://www.greatspire.io'
+        source: 'Creator Terms',
+        url: 'https://www.greatspire.io/creator-terms'
     },
     {
         id: 'payment_flow',
         title: 'How do I get paid?',
-        content: 'Payments go to Great Spire -> Transferred to you monthly (minus Stripe/Store fees). Summary provided.',
-        keywords: ['Payment Flow', 'Stripe', 'Payout'],
+        content: 'Payments go to Great Spire -> Transferred to you monthly. Deductions: 15% App Store/Google Play fee (for in-app sales) + standard Stripe fees. You keep the rest.',
+        keywords: ['Payment Flow', 'Stripe', 'Payout', 'Fees', '15%'],
         category: 'Practitioner Operations',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
@@ -280,10 +280,19 @@ export const knowledgeDocuments = [
         url: 'https://gs-nu.vercel.app/auth/login'
     },
     {
+        id: 'sales_visibility',
+        title: 'Can I see who bought my products?',
+        content: 'Currently, you **cannot** see individual customer details for product sales. This feature does not exist yet. You can see total sales numbers in your dashboard.',
+        keywords: ['Sales', 'Customer', 'Who bought', 'Dashboard'],
+        category: 'Practitioner Tools',
+        source: 'Great Spire Guide',
+        url: 'https://gs-nu.vercel.app/auth/login'
+    },
+    {
         id: 'tom_contento',
-        title: 'What is Tom Contento (AI Great Creator)?',
-        content: 'AI assistant to help structure courses, write descriptions, and create promo content.',
-        keywords: ['AI', 'Tom Contento', 'Creator'],
+        title: 'What is the Great Spire AI Assistant?',
+        content: 'The Great Spire AI Assistant (formerly Tom Contento) helps structure courses, write descriptions, and create promo content.',
+        keywords: ['AI', 'Great Spire AI Assistant', 'Creator'],
         category: 'Practitioner Tools',
         source: 'Great Spire Guide',
         url: 'https://content.greatspire.app/'
@@ -376,12 +385,21 @@ export const knowledgeDocuments = [
         url: 'https://www.greatspire.io/support'
     },
     {
+        id: 'contact_practitioner',
+        title: 'How can people message me?',
+        content: 'There is **no in-app messaging** system yet. Seekers cannot message you directly on Great Spire. You can add your **WhatsApp number** or **Email** to your bio so they can contact you externally. You can also interact via Threads and Comments.',
+        keywords: ['Message', 'Contact', 'WhatsApp', 'Email', 'Bio', 'Communication'],
+        category: 'Support',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io/support'
+    },
+    {
         id: 'data_privacy',
         title: 'Is my data private?',
         content: 'Yes. No selling data. No targeted ads. Secure payments. Private by default.',
         keywords: ['Privacy', 'Data', 'Security'],
         category: 'Privacy & Data',
         source: 'Great Spire Guide',
-        url: 'https://www.greatspire.io/privacy'
+        url: 'https://www.greatspire.io/privacy-policy'
     }
 ];

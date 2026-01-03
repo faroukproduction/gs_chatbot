@@ -7,6 +7,7 @@ class GreatSpireChatbot {
     constructor() {
         this.isOpen = false;
         this.messages = [];
+        this.messageCount = 0; // Track number of user interactions
         this.init();
     }
 
@@ -171,15 +172,8 @@ class GreatSpireChatbot {
         this.quickRepliesContainer.innerHTML = '';
         this.quickRepliesContainer.style.display = 'none';
 
-        // Get response for intent
-        const intent = window.GreatSpireKB.intents[reply.intent];
-        if (intent) {
-            this.showTyping();
-            setTimeout(() => {
-                this.hideTyping();
-                this.addMessage(intent.response, 'bot', intent);
-            }, 800);
-        }
+        // FULL LLM: Send to RAG backend instead of local JS intents
+        this.processMessage(reply.text);
 
         this.trackEvent('quick_reply_clicked', { intent: reply.intent });
     }
@@ -216,9 +210,92 @@ class GreatSpireChatbot {
                     // RAG response with sources
                     let answer = response.answer;
 
-                    // Add source attribution if available (deduplicated)
-                    // Replace sources with static Support link as requested
-                    answer += `\n\n<small style="color: #A0A0B0;">Support: <a href="https://www.greatspire.io/support" target="_blank">GreatSpire Support</a></small>`;
+                    // Smart Footer Logic
+                    this.messageCount++;
+
+                    let footerHtml = '';
+
+                    if (this.messageCount >= 3) {
+                        // 3rd answer onwards: Contact Block (Gray heading, tight spacing)
+                        footerHtml = `<small style="color: #6B6B8D; margin-top: 8px; padding-top: 8px; display: block; border-top: 1px solid rgba(125, 89, 217, 0.1); margin-bottom: -4px; padding-bottom: 0;">
+                            <span style="font-size: 14px; font-weight: 600; color: #6B6B8D; display: block; margin-bottom: 2px;">Still have questions?</span>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; margin: 0; padding: 0; gap: 0; line-height: 1.4;">
+                                <a href="https://calendly.com/boni-nongay-greatspire/30min" target="_blank" style="color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">Book a Call with Us</a>
+                                <a href="https://api.whatsapp.com/send?phone=13527065766" target="_blank" style="color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">WhatsApp: +1 (352) 706-5766</a>
+                                <a href="https://www.greatspire.io/support" target="_blank" style="color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">Email Support</a>
+                            </div>
+                        </small>`;
+                    } else {
+                        // 1st & 2nd answers: Always show "Read more" with context-aware link
+                        let linkTitle = "Terms and Conditions"; // Default
+                        let linkUrl = "https://www.greatspire.io/terms-and-conditions";
+
+                        if (response.sources && response.sources.length > 0) {
+                            const source = response.sources[0];
+                            const url = (source.url || '').toLowerCase();
+                            const titleLC = (source.title || '').toLowerCase();
+                            const contentLC = (source.content || '').toLowerCase();
+                            const combined = titleLC + ' ' + contentLC;
+
+                            // PRIVACY POLICY - data, privacy, rights, sharing, retention, age, GDPR, CCPA
+                            if (url.includes('privacy') ||
+                                combined.includes('privacy') || combined.includes('personal data') ||
+                                combined.includes('gdpr') || combined.includes('ccpa') ||
+                                combined.includes('data collect') || combined.includes('data shar') ||
+                                combined.includes('data retention') || combined.includes('cookie') ||
+                                combined.includes('tracking') || combined.includes('opt out') ||
+                                combined.includes('marketing communication') || combined.includes('data protection') ||
+                                combined.includes('security measure') || combined.includes('data stored') ||
+                                combined.includes('minimum age') || combined.includes('under 16') ||
+                                combined.includes('parental') || combined.includes('voice data')) {
+                                linkTitle = "Privacy Policy";
+                                linkUrl = "https://www.greatspire.io/privacy-policy";
+
+                                // CREATOR TERMS - revenue, fees, payout, rights, licensing, content standards, refunds
+                            } else if (url.includes('creator') ||
+                                combined.includes('revenue') || combined.includes('payout') ||
+                                combined.includes('stripe fee') || combined.includes('100%') || combined.includes('15%') ||
+                                combined.includes('earnings') || combined.includes('commission') ||
+                                combined.includes('intellectual property') || combined.includes('retain') ||
+                                combined.includes('license') && combined.includes('content') ||
+                                combined.includes('sell') && combined.includes('platform') ||
+                                combined.includes('remove my content') || combined.includes('content standard') ||
+                                combined.includes('health claim') || combined.includes('plagiarism') ||
+                                combined.includes('quality standard') || combined.includes('refund') ||
+                                combined.includes('no-show') || combined.includes('dispute') ||
+                                combined.includes('terminate my account') || combined.includes('marketing campaign')) {
+                                linkTitle = "Creator Terms";
+                                linkUrl = "https://www.greatspire.io/creator-terms";
+
+                                // LICENSES & CREDITS - attribution, CC BY, assets, avatars, emojis, derivative
+                            } else if (url.includes('licenses') || url.includes('credits') ||
+                                combined.includes('attribution') || combined.includes('cc by') ||
+                                combined.includes('creative commons') || combined.includes('avatar') ||
+                                combined.includes('emoji') || combined.includes('asset') ||
+                                combined.includes('derivative work') || combined.includes('sublicense') ||
+                                combined.includes('tasl') || combined.includes('copyright notice') ||
+                                combined.includes('original source') || combined.includes('lina') ||
+                                combined.includes('noto') || combined.includes('google') && combined.includes('emoji')) {
+                                linkTitle = "Licenses & Credits";
+                                linkUrl = "https://www.greatspire.io/licenses-credits";
+
+                                // TERMS AND CONDITIONS - clarification, risk, compliance, features (default)
+                            } else {
+                                // Default catches: terminate, suspended, owns content, payment methods, 
+                                // legally responsible, liable, stripe error, consent, laws govern,
+                                // disputes, indemnification, binding agreement, sell services,
+                                // prohibited content, medical advice, notified of changes
+                                linkTitle = "Terms and Conditions";
+                                linkUrl = "https://www.greatspire.io/terms-and-conditions";
+                            }
+                        }
+
+                        footerHtml = `<small style="color: #6B6B8D; margin-top: 8px; padding-top: 8px; display: block; border-top: 1px solid rgba(125, 89, 217, 0.1);">
+                            Read more: <a href="${linkUrl}" target="_blank" style="color: #5045EC; text-decoration: none; font-weight: 600;">${linkTitle}</a>
+                        </small>`;
+                    }
+
+                    answer += footerHtml;
 
                     this.addMessage(answer, 'bot');
                     this.trackEvent('rag_response', {
