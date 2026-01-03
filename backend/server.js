@@ -6,11 +6,16 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { vectorStore } from './vector-store.js';
 import { llmService } from './llm-service.js';
 
 // Load environment variables
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,11 +23,17 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public'))); // Serve frontend files with absolute path
 
 // Request logging
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} ${req.method} ${req.path}`);
     next();
+});
+
+// Root route - serve index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Health check

@@ -248,9 +248,9 @@ class GreatSpireChatbot {
     }
 
     async callRAGBackend(message) {
-        // Use configured backend URL or default to local dev
+        // Use configured backend URL or default to relative path (standard for single-deployment)
         const apiUrl = (window.GreatSpireConfig && window.GreatSpireConfig.backendUrl)
-            || 'http://localhost:3001/api/chat';
+            || '/api/chat';
 
         const response = await fetch(apiUrl, {
             method: 'POST',
