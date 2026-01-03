@@ -144,7 +144,7 @@ ${languageInstructions[language] || languageInstructions.en}`;
             sources: context.map(item => ({
                 title: item.document.title,
                 source: item.document.source,
-                url: item.document.sourceUrl,
+                url: item.document.url,
                 similarity: item.similarity
             })),
             language,

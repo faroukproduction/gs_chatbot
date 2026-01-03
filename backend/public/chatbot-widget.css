@@ -521,21 +521,56 @@
 /* ============================================
    Mobile Responsive - Enhanced
    ============================================ */
+/* Close Header Button */
+.gs-close-header {
+  display: none;
+  /* Hidden by default (desktop) */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+  padding: 0;
+  margin-left: auto;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.gs-close-header:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   Mobile Responsive - Enhanced
+   ============================================ */
 @media (max-width: 480px) {
   .gs-chatbot-panel {
-    width: calc(100vw - 24px);
-    height: calc(100vh - 100px);
-    max-height: 85vh;
-    bottom: 88px;
-    right: 12px;
-    border-radius: 24px;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Show header close button on mobile */
+  .gs-close-header {
+    display: block;
+  }
+
+  /* Hide bottom toggle button when chat is open on mobile */
+  body:has(.gs-chatbot-panel.open) .gs-chatbot-button {
+    display: none !important;
   }
 
   .gs-chatbot-button {
     width: 60px;
     height: 60px;
-    bottom: 16px;
-    right: 12px;
+    bottom: 20px;
+    right: 20px;
   }
 
   .gs-chatbot-button .logo-icon {

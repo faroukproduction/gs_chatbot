@@ -54,6 +54,7 @@ class GreatSpireChatbot {
           <h3>Great Spire Assistant</h3>
           <p>Here to help you succeed</p>
         </div>
+        <button class="gs-close-header" aria-label="Close chat">×</button>
       </div>
       <div class="gs-chatbot-messages" id="gs-messages" role="log" aria-live="polite"></div>
       <div class="gs-quick-replies" id="gs-quick-replies"></div>
@@ -74,6 +75,7 @@ class GreatSpireChatbot {
 
         this.button = button;
         this.panel = panel;
+        this.closeHeaderBtn = panel.querySelector('.gs-close-header');
         this.messagesContainer = panel.querySelector('#gs-messages');
         this.quickRepliesContainer = panel.querySelector('#gs-quick-replies');
         this.input = panel.querySelector('#gs-input');
@@ -83,6 +85,9 @@ class GreatSpireChatbot {
     bindEvents() {
         // Toggle chat
         this.button.addEventListener('click', () => this.toggle());
+
+        // Header close button
+        this.closeHeaderBtn.addEventListener('click', () => this.close());
 
         // Send message
         this.sendButton.addEventListener('click', () => this.sendMessage());
