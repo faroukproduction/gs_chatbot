@@ -217,20 +217,8 @@ class GreatSpireChatbot {
                     let answer = response.answer;
 
                     // Add source attribution if available (deduplicated)
-                    if (response.sources && response.sources.length > 0) {
-                        // Deduplicate sources by source name
-                        const uniqueSources = response.sources.reduce((acc, s) => {
-                            if (!acc.find(existing => existing.source === s.source)) {
-                                acc.push(s);
-                            }
-                            return acc;
-                        }, []);
-
-                        const sourcesList = uniqueSources
-                            .map(s => `<a href="${s.url}" target="_blank">${s.source}</a>`)
-                            .join(' | ');
-                        answer += `\n\n<small style="color: #A0A0B0;">Sources: ${sourcesList}</small>`;
-                    }
+                    // Replace sources with static Support link as requested
+                    answer += `\n\n<small style="color: #A0A0B0;">Support: <a href="https://www.greatspire.io/support" target="_blank">GreatSpire Support</a></small>`;
 
                     this.addMessage(answer, 'bot');
                     this.trackEvent('rag_response', {

@@ -1,7 +1,7 @@
 /**
  * Great Spire Knowledge Base Documents
  * Source content for RAG vector store
- * MERGED CHUNKS 1-7: COMPLETE COMPREHENSIVE GUIDE (Web Resources Added)
+ * MERGED CHUNKS 1-8: COMPLETE COMPREHENSIVE GUIDE (Restored & Polished)
  */
 
 export const knowledgeDocuments = [
@@ -34,11 +34,11 @@ export const knowledgeDocuments = [
         url: 'https://www.greatspire.io'
     },
     {
-        id: 'download_app_links',
-        title: 'Where can I download the Great Spire app?',
-        content: 'iOS App Store: https://apps.apple.com/pl/app/great-spire-social-wellness/id6746274243 \nGoogle Play Store: https://play.google.com/store/apps/details?id=io.greatspire',
-        keywords: ['Download', 'App Store', 'Google Play', 'iOS', 'Android', 'Links'],
-        category: 'Getting Started',
+        id: 'app_cost',
+        title: 'How much does Great Spire cost?',
+        content: 'Great Spire is completely free to join with no subscriptions. Free membership includes library access and community features.',
+        keywords: ['Cost', 'Free', 'Price', 'Subscription'],
+        category: 'About Great Spire',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
     },
@@ -83,6 +83,15 @@ export const knowledgeDocuments = [
 
     // === GETTING STARTED ===
     {
+        id: 'download_app_links',
+        title: 'Where can I download the Great Spire app?',
+        content: 'iOS App Store: https://apps.apple.com/pl/app/great-spire-social-wellness/id6746274243 \nGoogle Play Store: https://play.google.com/store/apps/details?id=io.greatspire',
+        keywords: ['Download', 'App Store', 'Google Play', 'iOS', 'Android', 'Links'],
+        category: 'Getting Started',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
         id: 'create_account',
         title: 'How do I create a Great Spire account?',
         content: '1. Download App. 2. Tap "Sign Up". 3. Register with Email (Magic Link). 4. Enter Code. 5. Create Profile.',
@@ -100,16 +109,52 @@ export const knowledgeDocuments = [
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io/support'
     },
-
-    // === PRODUCTS, PAYMENTS & REFUNDS ===
     {
-        id: 'payment_methods',
-        title: 'How do payments and refunds work?',
-        content: 'Payments via Stripe (secure one-time). No subscription fees. Refunds for products generally NOT issued (instant access). Refunds for sessions issued if practitioner cancels. Request refund via Support within 7 days.',
-        keywords: ['Payment', 'Refund', 'Stripe', 'Policy'],
-        category: 'Payments & Refunds',
+        id: 'registration_errors',
+        title: 'How can I fix registration errors?',
+        content: 'Double-check email typo. Ensure email not already used. Contact support if stuck.',
+        keywords: ['Error', 'Registration', 'Support'],
+        category: 'Getting Started',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io/support'
+    },
+    {
+        id: 'guest_access',
+        title: 'Can I use the app without registering?',
+        content: 'Yes, as a guest with limited access. Registration required to post, save, or buy.',
+        keywords: ['Guest', 'Access', 'Register'],
+        category: 'Getting Started',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'real_name',
+        title: 'Can I use the app without sharing my real name?',
+        content: 'Yes. You can use a pseudonym/username. Legal name not required publicly.',
+        keywords: ['Real Name', 'Username', 'Privacy'],
+        category: 'Getting Started',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'account_benefits',
+        title: 'What are the benefits of a Great Spire account?',
+        content: '1. Full App Features (Threads). 2. AI Great Reader (Readings). 3. Bookmark Content. 4. Purchase Products/Sessions. 5. Join Communities.',
+        keywords: ['Benefits', 'Features', 'Community'],
+        category: 'Getting Started',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+
+    // === PRODUCTS & BOOKINGS ===
+    {
+        id: 'digital_products_list',
+        title: 'What digital products are available?',
+        content: 'Courses, Audio Journeys, Guided Meditations, Sound Healings, Sleep Aids, Podcasts, Videos, Workbooks.',
+        keywords: ['Products', 'Courses', 'Meditations', 'Sound', 'Sleep'],
+        category: 'Products & Bookings',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
     },
     {
         id: 'purchase_product',
@@ -120,22 +165,87 @@ export const knowledgeDocuments = [
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
     },
+    {
+        id: 'subscription_check',
+        title: 'Do I need a subscription?',
+        content: 'No. All purchases are one-time payments.',
+        keywords: ['Subscription', 'One-time', 'Payment'],
+        category: 'Products & Bookings',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'find_practitioner',
+        title: 'How do I find a practitioner?',
+        content: 'Browse feed, search by modality, or view trending profiles.',
+        keywords: ['Find', 'Practitioner', 'Search'],
+        category: 'Products & Bookings',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'book_session',
+        title: 'How do I book a 1-1 session?',
+        content: '1:1 Coaching and Calls are **coming soon**! This feature is currently under development and will be available in the near future.',
+        keywords: ['Book', 'Session', '1:1', 'Appointment', 'Coaching', 'Coming Soon'],
+        category: 'Products & Bookings',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+
+    // === PAYMENTS & REFUNDS ===
+    {
+        id: 'payment_methods',
+        title: 'How do payments and refunds work?',
+        content: 'Payments via Stripe (secure one-time). No subscription fees. Refunds for products generally NOT issued (instant access). Refunds for sessions issued if practitioner cancels. Request refund via Support within 7 days.',
+        keywords: ['Payment', 'Refund', 'Stripe', 'Policy'],
+        category: 'Payments & Refunds',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io/support'
+    },
+    {
+        id: 'refund_policy_digital',
+        title: 'What is the refund policy for digital products?',
+        content: 'Refunds generally NOT issued (instant access). Exceptions: Technical failure or misrepresentation. Contact Support within 7 days.',
+        keywords: ['Refund', 'Policy', 'Digital Product'],
+        category: 'Payments & Refunds',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io/support'
+    },
+    {
+        id: 'refund_policy_sessions',
+        title: 'What is the refund policy for 1:1 sessions?',
+        content: 'Refund issued if practitioner cancels/misses. NO refund for client no-show or change of mind.',
+        keywords: ['Refund', 'Session', 'Cancellation'],
+        category: 'Payments & Refunds',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io/support'
+    },
 
     // === PRACTITIONER OPERATIONS & REVENUE ===
     {
         id: 'practitioner_revenue',
         title: 'How does revenue work for practitioners?',
-        content: 'You keep 100% of what you earn. No platform commission. Stripe fees apply (~3%). Payouts given monthly.',
-        keywords: ['Revenue', 'Earnings', '100%', 'Commission'],
+        content: 'You keep 100% of your earnings after external fees. For in-app digital product sales, Apple/Google take a 15% fee. Standard Stripe processing fees (~3%) also apply. Great Spire takes 0%.',
+        keywords: ['Revenue', 'Earnings', '100%', 'Commission', 'Fees', '15%'],
         category: 'Practitioner Operations',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
     },
     {
         id: 'app_store_pricing',
-        title: 'Why is there a price adjustment on Apple/Google stores?',
-        content: 'Apple/Google charge 15% commission. To ensure you receive your full 100% earnings, a +15% price adjustment is added to in-app purchases on mobile.',
-        keywords: ['Pricing', 'Commission', 'Apple', 'Google', '15%'],
+        title: 'What are the fees for selling on Great Spire?',
+        content: 'For digital products sold in the app, there is a **15% fee** charged by Apple/Google. In addition, standard Stripe processing fees apply (~3%). There are NO platform fees from Great Spire itself (we take 0%). You keep 100% of the remaining revenue.',
+        keywords: ['Pricing', 'Commission', 'Apple', 'Google', '15%', 'Fees', 'Stripe'],
+        category: 'Practitioner Operations',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'payment_flow',
+        title: 'How do I get paid?',
+        content: 'Payments go to Great Spire -> Transferred to you monthly (minus Stripe/Store fees). Summary provided.',
+        keywords: ['Payment Flow', 'Stripe', 'Payout'],
         category: 'Practitioner Operations',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
@@ -205,12 +315,52 @@ export const knowledgeDocuments = [
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
     },
+
+    // === PRACTITIONER SUCCESS & MARKETING ===
     {
         id: 'community_strategy',
         title: 'What is a good community engagement strategy?',
         content: 'Micro-dose content: Mon (Practice), Wed (Tool), Fri (AMA). Monthly Challenge. Consistency is key.',
         keywords: ['Strategy', 'Weekly', 'Plan', 'Engagement'],
         category: 'Practitioner Success',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'social_media_promo',
+        title: 'How do I promote on social media?',
+        content: 'Share snippets/quotes on Insta/FB. Direct people to app for "deeper" content. Don\'t be pushy.',
+        keywords: ['Social Media', 'Promotion', 'Marketing'],
+        category: 'Practitioner Success',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'collect_reviews',
+        title: 'How do I get reviews?',
+        content: 'Ask clients after sessions. Message them: "Search my name -> Write Review".',
+        keywords: ['Reviews', 'Testimonials'],
+        category: 'Practitioner Success',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+
+    // === FEATURES & USAGE ===
+    {
+        id: 'feed_info',
+        title: 'How does the Feed work?',
+        content: 'Personalized wellness space with threads, communities, and practitioners.',
+        keywords: ['Feed', 'Personalized'],
+        category: 'Features & Usage',
+        source: 'Great Spire Guide',
+        url: 'https://www.greatspire.io'
+    },
+    {
+        id: 'ai_reader',
+        title: 'What is the AI Great Reader?',
+        content: 'Free readings in Astrology, Tarot, Human Design, etc.',
+        keywords: ['AI', 'Reader', 'Readings', 'Tarot'],
+        category: 'Features & Usage',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
     },
