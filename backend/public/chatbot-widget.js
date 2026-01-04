@@ -216,13 +216,13 @@ class GreatSpireChatbot {
                     let footerHtml = '';
 
                     if (this.messageCount >= 3) {
-                        // 3rd answer onwards: Contact Block (Gray heading, tight spacing)
-                        footerHtml = `<small style="color: #6B6B8D; margin-top: 8px; padding-top: 8px; display: block; border-top: 1px solid rgba(125, 89, 217, 0.1); margin-bottom: -4px; padding-bottom: 0;">
-                            <span style="font-size: 14px; font-weight: 600; color: #6B6B8D; display: block; margin-bottom: 2px;">Still have questions?</span>
-                            <div style="display: flex; flex-direction: column; align-items: flex-start; margin: 0; padding: 0; gap: 0; line-height: 1.4;">
-                                <a href="https://calendly.com/boni-nongay-greatspire/30min" target="_blank" style="color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">Book a Call with Us</a>
-                                <a href="https://api.whatsapp.com/send?phone=13527065766" target="_blank" style="color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">WhatsApp: +1 (352) 706-5766</a>
-                                <a href="https://www.greatspire.io/support" target="_blank" style="color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">Email Support</a>
+                        // 3rd answer onwards: Contact Block (Refined design)
+                        footerHtml = `<small style="color: #6B6B8D; margin-top: 14px; padding-top: 14px; display: block; border-top: 1px solid rgba(125, 89, 217, 0.1); margin-bottom: -4px; padding-bottom: 0;">
+                            <span style="font-size: 13px; font-weight: 400; color: #6B6B8D; display: block; margin-bottom: 8px;">Still have questions?</span>
+                            <div style="margin: 0; padding: 0; line-height: 1.4;">
+                                <a href="https://calendly.com/boni-nongay-greatspire/30min" target="_blank" style="display: block; width: fit-content; margin-bottom: 6px; color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">Book a Call with Us</a>
+                                <a href="https://api.whatsapp.com/send?phone=13527065766" target="_blank" style="display: block; width: fit-content; margin-bottom: 6px; color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">WhatsApp: +1 (352) 706-5766</a>
+                                <a href="https://www.greatspire.io/support" target="_blank" style="display: block; width: fit-content; margin-bottom: 5px; color: #5045EC; font-weight: 600; text-decoration: none; font-size: 13px; line-height: 1.4;">Email Support</a>
                             </div>
                         </small>`;
                     } else {
@@ -235,7 +235,8 @@ class GreatSpireChatbot {
                             const url = (source.url || '').toLowerCase();
                             const titleLC = (source.title || '').toLowerCase();
                             const contentLC = (source.content || '').toLowerCase();
-                            const combined = titleLC + ' ' + contentLC;
+                            const queryLC = text.toLowerCase(); // Use user's question for better matching
+                            const combined = titleLC + ' ' + contentLC + ' ' + queryLC; // derived from Source + Query
 
                             // PRIVACY POLICY - data, privacy, rights, sharing, retention, age, GDPR, CCPA
                             if (url.includes('privacy') ||
@@ -281,23 +282,30 @@ class GreatSpireChatbot {
 
                                 // TERMS AND CONDITIONS - clarification, risk, compliance, features (default)
                             } else {
-                                // Default catches: terminate, suspended, owns content, payment methods, 
-                                // legally responsible, liable, stripe error, consent, laws govern,
-                                // disputes, indemnification, binding agreement, sell services,
-                                // prohibited content, medical advice, notified of changes
+                                // Default catches everything else
                                 linkTitle = "Terms and Conditions";
                                 linkUrl = "https://www.greatspire.io/terms-and-conditions";
                             }
                         }
 
-                        footerHtml = `<small style="color: #6B6B8D; margin-top: 8px; padding-top: 8px; display: block; border-top: 1px solid rgba(125, 89, 217, 0.1);">
-                            Read more: <a href="${linkUrl}" target="_blank" style="color: #5045EC; text-decoration: none; font-weight: 600;">${linkTitle}</a>
-                        </small>`;
+                        footerHtml = `<div class="gs-support-container">
+                            <span class="gs-read-more-text">
+                                Read more: <a href="${linkUrl}" target="_blank">${linkTitle}</a>
+                            </span>
+                        </div>`;
                     }
 
-                    answer += footerHtml;
+                    // Parse the answer text first (handles newlines -> <br> and bolding)
+                    let fullMessageHtml = this.parseContent(answer);
 
-                    this.addMessage(answer, 'bot');
+                    // Append the footer HTML (already formatted, no parsing needed)
+                    // We remove newlines from footerHtml just in case to be perfectly clean
+                    if (footerHtml) {
+                        fullMessageHtml += footerHtml.replace(/\n/g, '');
+                    }
+
+                    // Send as HTML (isHtml = true) since we manually gathered the pieces
+                    this.addMessage(fullMessageHtml, 'bot', null, true);
                     this.trackEvent('rag_response', {
                         sourcesCount: response.sources?.length || 0,
                         language: response.language,
@@ -401,6 +409,10 @@ class GreatSpireChatbot {
     parseContent(text) {
         // Convert **bold** to <strong>
         text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Convert [text](url) to <a href="url">text</a>
+        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #5045EC; text-decoration: none; font-weight: 600;">$1</a>');
+
         // Convert newlines to <br>
         text = text.replace(/\n/g, '<br>');
         return text;

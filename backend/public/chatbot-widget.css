@@ -686,3 +686,20 @@
 .gs-contact-links {
   display: none !important;
 }
+
+.gs-read-more-text {
+  display: block;
+  font-size: 13px;
+  color: var(--gs-text-secondary);
+  line-height: 1.5;
+}
+
+.gs-read-more-text a {
+  color: var(--gs-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gs-read-more-text a:hover {
+  text-decoration: underline;
+}

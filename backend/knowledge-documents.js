@@ -94,16 +94,16 @@ export const knowledgeDocuments = [
     {
         id: 'create_account',
         title: 'How do I create a Great Spire account?',
-        content: '1. Download App. 2. Tap "Sign Up". 3. Register with Email (Magic Link). 4. Enter Code. 5. Create Profile.',
-        keywords: ['Account', 'Sign Up', 'Register', 'Magic Link'],
+        content: '1. Download App. 2. Tap "Sign Up". 3. Register with Email (We will send an activation link to your email). 4. Click the link to verify. 5. Create Profile.',
+        keywords: ['Account', 'Sign Up', 'Register', 'Magic Link', 'Activation'],
         category: 'Getting Started',
         source: 'Great Spire Guide',
         url: 'https://www.greatspire.io'
     },
     {
         id: 'magic_link_help',
-        title: 'I didn’t get my magic link – what should I do?',
-        content: 'Check spam. Ensure email is correct. Wait a few minutes. Contact support@greatspire.com if issues persist.',
+        title: 'I didn’t get my activation link (magic link) – what should I do?',
+        content: 'Check spam folder. Ensure email address is correct. Wait a few minutes. Contact support@greatspire.com if you still don\'t see the activation email.',
         keywords: ['Magic Link', 'Issue', 'Support'],
         category: 'Getting Started',
         source: 'Great Spire Guide',
